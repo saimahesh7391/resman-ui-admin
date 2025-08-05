@@ -19,7 +19,8 @@ export default defineConfig({
       // remotes: {
       //   host_app: "http://localhost:3000/remoteEntry.js",
       // },
-      shared: ["react"],
+      shared: ["react", "react-dom", "react-router-dom"]
+
     }),
   ],
   build: {
