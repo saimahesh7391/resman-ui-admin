@@ -1,5 +1,8 @@
-// resmanui-admin/src/admin/sidebar.config.ts
-export const AdminSidebarConfig = [
-  { label: "Dashboard", path: "/admin/dashboard" },
-  { label: "Companies", path: "/admin/companies" },
+// resman-ui-admin/src/admin/sidebar.config.ts
+const sidebarConfig = [
+  { label: "Dashboard", path: "/admin" },
+  { label: "Users", path: "/admin/users" },
+  { label: "Settings", path: "/admin/settings" },
 ];
+
+export default sidebarConfig;
