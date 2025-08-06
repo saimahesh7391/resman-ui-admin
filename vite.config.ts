@@ -16,7 +16,7 @@ export default defineConfig({
         "./AdminRoutes": "./src/admin/AdminRoutes.tsx",
         "./AdminSidebarConfig": "./src/admin/sidebar.config.ts",
       },
-      shared: ["react", "react-dom", "react-router-dom", "@mui/material", "@mui/icons-material", "axios", "@tanstack/react-query"],
+      shared: ["react", "react-dom", "react-router-dom", "@mui/material", "axios", "@tanstack/react-query"],
     }),
   ],
   build: {
