@@ -165,7 +165,7 @@ const DynamicFields = ({
                 />
               );
             default:
-              return null;
+              return <></>;
           }
         }}
       />
