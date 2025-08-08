@@ -15,40 +15,40 @@ export const AdminSidebarItems: SidebarConfig = [
   {
     section: 'General',
     items: [
-      { label: 'Roles', path: 'roles' },
-      { label: 'Groups', path: 'groups' },
-      { label: 'Designation', path: 'designation' },
+      { label: 'Roles', path: 'admin/roles' },
+      { label: 'Groups', path: 'admin/groups' },
+      { label: 'Designation', path: 'admin/designation' },
     ],
   },
   {
     section: 'Company',
     items: [
-      { label: 'Manage Company', path: 'companies' },
-      { label: 'Manage Documents', path: 'documents' },
+      { label: 'Manage Company', path: 'admin/companies' },
+      { label: 'Manage Documents', path: 'admin/documents' },
     ],
   },
   {
     section: 'Client and Partners',
     items: [
-      { label: 'Manage Clients/Partners', path: 'clients-partners' },
-      { label: 'MSA and SOW', path: 'msa-and-sow' },
+      { label: 'Manage Clients/Partners', path: 'admin/clients-partners' },
+      { label: 'MSA and SOW', path: 'admin/msa-and-sow' },
     ],
   },
   {
     section: 'Employee',
     items: [
-      { label: 'Directory', path: 'directory' },
-      { label: 'Leaves', path: 'leaves' },
+      { label: 'Directory', path: 'admin/directory' },
+      { label: 'Leaves', path: 'admin/leaves' },
     ],
   },
   {
     section: 'Approvals',
     items: [
-      { label: 'Employee Onboard', path: 'onboard' },
-      { label: 'Leaves', path: 'approve-leaves' },
-      { label: 'Timesheet', path: 'timesheet' },
-      { label: 'Expenses', path: 'expenses' },
-      { label: 'Clients and Partners', path: 'approve-clients' },
+      { label: 'Employee Onboard', path: 'admin/onboard' },
+      { label: 'Leaves', path: 'admin/approve-leaves' },
+      { label: 'Timesheet', path: 'admin/timesheet' },
+      { label: 'Expenses', path: 'admin/expenses' },
+      { label: 'Clients and Partners', path: 'admin/approve-clients' },
     ],
   },
 ];

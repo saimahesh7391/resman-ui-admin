@@ -29,8 +29,10 @@ type IntelligentTableProps<T> = {
   columns: Column<T>[];
   rows: T[];
   enableSearch?: boolean;
+  enableFilters?: boolean;
   enableAdd?: boolean;
   onSearch?: (value: string) => void;
+  onFilterChange?: (filters: Record<string, any>) => void;
   onAddClick?: () => void;
 };
 
@@ -53,12 +55,6 @@ export default function IntelligentTable<T>({
       {} as Record<keyof T, boolean>,
     ),
   );
-
-  // const handleSearchChange = (e: any) => {
-  //   const value = e.target.value;
-  //   setSearchValue(value);
-  //   onSearch?.(value); // Send to parent
-  // };
 
   const handleSearchChange = (e: any) => {
     const value = e.target.value;

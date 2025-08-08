@@ -24,22 +24,25 @@ const AdminRoutes = () => {
     <QueryClientProvider client={queryClient}>
       <Routes>
         <Route path="/" element={<AdminDashboard />} />
-        <Route path="/roles" element={<RolesPage />} />
-        <Route path="/groups" element={<GroupsPage />} />
-        <Route path="/designation" element={<DesignationPage />} />
-        <Route path="/companies" element={<CompaniesListPage />} />
-        <Route path="/companies/:mode/:id?" element={<CompanyFormPage />} />
-        <Route path="/finance/:mode/:id?" element={<FinanceFormPage />} />
-        <Route path="/documents" element={<DocumentsPage />} />
-        <Route path="/msa-and-sow" element={<MsaAndSowPage />} />
-        <Route path="/show-documents" element={<CompanyAndDocument />} />
-        {/* <Route path="/clients-partners" element={<ClientsPartnersPage />} />
-        <Route path="/directory" element={<DirectoryPage />} />
-        <Route path="/leaves" element={<LeavesPage />} />
-        <Route path="/onboard" element={<OnboardPage />} />
-        <Route path="/approve-leaves" element={<ApproveLeavesPage />} />
-        <Route path="/timesheet" element={<TimesheetPage />} />
-        <Route path="/expenses" element={<ExpensesPage />} />
+        <Route path="admin/roles" element={<RolesPage />} />
+        <Route path="admin/groups" element={<GroupsPage />} />
+        <Route path="admin/designation" element={<DesignationPage />} />
+        <Route path="admin/companies" element={<CompaniesListPage />} />
+        <Route
+          path="admin/companies/:mode/:id?"
+          element={<CompanyFormPage />}
+        />
+        <Route path="admin/finance/:mode/:id?" element={<FinanceFormPage />} />
+        <Route path="admin/documents" element={<DocumentsPage />} />
+        <Route path="admin/msa-and-sow" element={<MsaAndSowPage />} />
+        <Route path="admin/show-documents" element={<CompanyAndDocument />} />
+        {/* <Route path="admin/clients-partners" element={<ClientsPartnersPage />} />
+        <Route path="admin/directory" element={<DirectoryPage />} />
+        <Route path="admin/leaves" element={<LeavesPage />} />
+        <Route path="admin/onboard" element={<OnboardPage />} />
+        <Route path="admin/approve-leaves" element={<ApproveLeavesPage />} />
+        <Route path="admin/timesheet" element={<TimesheetPage />} />
+        <Route path="admin/expenses" element={<ExpensesPage />} />
         <Route path="/approve-clients" element={<ApproveClientsPage />} /> */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
