@@ -1,15 +1,15 @@
 // src/modules/admin/AdminRoutes.tsx
 import { Routes, Route } from 'react-router-dom';
 import AdminDashboard from './pages/AdminDashboard';
-import RolesPage from './pages/RolesPage';
-import DesignationPage from './pages/DesignationPage';
-import GroupsPage from './pages/GroupsPage';
-import CompaniesListPage from './pages/CompaniesListPage';
-import DocumentsPage from './pages/DocumentsPage';
-import MsaAndSowPage from './pages/MsaAndSow';
+import RolesPage from './pages/general/RolesPage';
+import DesignationPage from './pages/general/DesignationPage';
+import GroupsPage from './pages/general/GroupsPage';
+import CompaniesListPage from './pages/companies/CompaniesListPage';
+import DocumentsPage from './pages/client-and-partners/DocumentsPage';
+import MsaAndSowPage from './pages/client-and-partners/MsaAndSow';
 import CompanyFormPage from '@/components/forms/company/CompanyFormPage';
 import FinanceFormPage from '@/components/forms/finance/FinanceFormPage';
-import CompanyAndDocument from './pages/CompanyAndDocuments';
+import CompanyAndDocument from './pages/companies/CompanyAndDocuments';
 import NotFoundPage from '@/components/common/NotFoundPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 

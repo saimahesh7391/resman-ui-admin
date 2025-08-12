@@ -10,8 +10,8 @@ import {
 } from '@mui/material';
 import CompanyFormPage from '@/components/forms/company/CompanyFormPage';
 import FinanceFormPage from '@/components/forms/finance/FinanceFormPage';
-import DocumentsPage from './DocumentsPage';
-import MsaAndSowPage from './MsaAndSow';
+import DocumentsPage from '../client-and-partners/DocumentsPage';
+import MsaAndSowPage from '../client-and-partners/MsaAndSow';
 import { companies, columns } from '@/components/constants/companies';
 import IntelligentTable from '@/components/common/IntelligentTable';
 
