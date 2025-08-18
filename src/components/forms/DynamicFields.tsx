@@ -1,4 +1,3 @@
-// File: /components/forms/DynamicFields.tsx
 import { Controller, type Control, type FieldErrors } from 'react-hook-form';
 import {
   TextField,
@@ -35,9 +34,9 @@ export interface FieldConfig {
   type: FieldType;
   placeholder?: string;
   options?: Option[];
-  isRequired?: boolean;
+  required?: boolean;
   className?: string;
-  disabled?: boolean; // ✅ Add this
+  disabled?: boolean;
 }
 
 interface DynamicFieldProps {
@@ -53,8 +52,7 @@ const DynamicFields = ({
   errors,
   disabled,
 }: DynamicFieldProps) => {
-  const { title, type, name, placeholder, options, isRequired, className } =
-    item;
+  const { title, type, name, placeholder, options, required, className } = item;
 
   const fieldError = errors[name as keyof typeof errors];
 
@@ -63,7 +61,7 @@ const DynamicFields = ({
       {type !== 'checkbox' && (
         <label htmlFor={name} className="font-medium text-sm">
           {title}
-          {isRequired && <span className="text-red-500"> *</span>}
+          {required && <span className="text-red-500"> *</span>}
         </label>
       )}
 
@@ -71,7 +69,7 @@ const DynamicFields = ({
         name={name}
         control={control}
         rules={{
-          required: isRequired ? `${title} is required` : false,
+          required: required ? `${title} is required` : false,
         }}
         render={({ field }) => {
           switch (type) {
@@ -155,14 +153,6 @@ const DynamicFields = ({
                     }}
                   />
                 </LocalizationProvider>
-              );
-            case 'file':
-              return (
-                <input
-                  type="file"
-                  onChange={(e) => field.onChange(e.target.files?.[0] || null)}
-                  disabled={disabled}
-                />
               );
             default:
               return <></>;

@@ -25,7 +25,7 @@ export type Column<T> = {
   render?: (value: T[keyof T], row: T) => React.ReactNode;
 };
 
-type IntelligentTableProps<T> = {
+export type IntelligentTableProps<T> = {
   columns: Column<T>[];
   rows: T[];
   enableSearch?: boolean;
@@ -34,6 +34,7 @@ type IntelligentTableProps<T> = {
   onSearch?: (value: string) => void;
   onFilterChange?: (filters: Record<string, any>) => void;
   onAddClick?: () => void;
+  onRowClick?: (row: T) => void;
 };
 
 export default function IntelligentTable<T>({
@@ -43,6 +44,7 @@ export default function IntelligentTable<T>({
   enableAdd = true,
   onSearch,
   onAddClick,
+  onRowClick,
 }: IntelligentTableProps<T>) {
   const [searchValue, setSearchValue] = useState('');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -158,7 +160,13 @@ export default function IntelligentTable<T>({
         </TableHead>
         <TableBody>
           {rows.map((row, idx) => (
-            <TableRow key={idx} className={idx % 2 === 0 ? 'bg-gray-100' : ''}>
+            <TableRow
+              key={idx}
+              className={idx % 2 === 0 ? 'bg-gray-100' : ''}
+              hover
+              style={{ cursor: onRowClick ? 'pointer' : 'default' }}
+              onClick={() => onRowClick?.(row)} // ✅ Pass row back
+            >
               {columns.map(
                 (col) =>
                   visibleColumns[col.key] && (

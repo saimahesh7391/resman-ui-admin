@@ -1,23 +1,29 @@
-// File: /components/forms/company/companySchema.ts
 import { z } from 'zod';
 
 export const companySchema = z.object({
-  companyId: z.string().min(1, 'Company ID is required'),
-  companyName: z.string().min(1, 'Company Name is required'),
-  // companyType: z.enum(['Client', 'Partner', 'Internal'], {
-  //   required_error: 'Company Type is required',
-  // }),
-  // companyCategory: z.enum(['Startup', 'Enterprise', 'Government'], {
-  //   required_error: 'Company Category is required',
-  // }),
-  buildingName: z.string().optional(),
-  address1: z.string().min(1, 'Address Line 1 is required'),
-  area: z.string().min(1, 'Area is required'),
-  city: z.string().min(1, 'City is required'),
-  state: z.string().min(1, 'State is required'),
-  country: z.string().min(1, 'Country is required'),
-  pincode: z.string().regex(/^\d{4,10}$/, 'Enter a valid pincode'),
-  addonInfo: z.string().optional(),
+  companyBizId: z.string().min(1, 'Company business ID is required'),
+  companyCin: z.string().min(1, 'Company CIN is required'),
+  // companyParentCompanyId: z
+  //   .string()
+  //   .min(1, 'Company parent company ID is required'),
+  companyName: z.string().min(1, 'Company name is required'),
+  companyAboutus: z.string().min(1, 'About Us is required'),
+  companyTypeId: z.string().min(1, 'Company type is required'), // comes from dropdown
+  companyCategoryId: z.string().min(1, 'Company category is required'), // comes from dropdown
+  active: z.enum(['Y', 'N'], {
+    error: 'Active status is required',
+  }),
 });
 
 export type CompanyFormValues = z.infer<typeof companySchema>;
+
+export const companyFormDefaultValues: CompanyFormValues = {
+  companyBizId: '',
+  companyCin: '',
+  // companyParentCompanyId: '',
+  companyName: '',
+  companyAboutus: '',
+  companyTypeId: '', // dropdown selected ID
+  companyCategoryId: '', // dropdown selected ID
+  active: 'Y',
+};
