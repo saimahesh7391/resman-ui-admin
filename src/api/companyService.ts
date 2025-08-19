@@ -1,12 +1,4 @@
-import { apiClient } from './apiClient';
-
-export interface ApiResponse<T> {
-  apiMessageCode: string;
-  apiMessage: string;
-  httpCode: string;
-  data: T[];
-  error: string | null;
-}
+import { apiClient, type ApiResponse } from './apiClient';
 
 export type Company = {
   companyBizId: string;

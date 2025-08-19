@@ -1,13 +1,13 @@
 // src/hooks/useCompany.ts
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import companyApi from '../api/companyService';
+import companyService from '../api/companyService';
 import type { Company } from '../api/companyService';
 
 export function useCompaniesByBizId(companyBizId: number) {
   return useQuery({
     queryKey: ['company', companyBizId],
     queryFn: async () => {
-      const res = await companyApi.getByBizId(companyBizId);
+      const res = await companyService.getByBizId(companyBizId);
       if (res.error) throw { ...res };
       return res.data;
     },
@@ -19,7 +19,7 @@ export function useCompanyById(id: number) {
   return useQuery({
     queryKey: ['company', id],
     queryFn: async () => {
-      const res = await companyApi.getById(id);
+      const res = await companyService.getById(id);
       if (res.error) throw { ...res };
       return res.data[0];
     },
@@ -31,7 +31,7 @@ export function useCompanyCategories() {
   return useQuery({
     queryKey: ['companyCategories'],
     queryFn: async () => {
-      const res = await companyApi.getCompanyCategories();
+      const res = await companyService.getCompanyCategories();
       if (res.error) throw res.error;
       return res.data || [];
     },
@@ -42,7 +42,7 @@ export function useCompanyTypes() {
   return useQuery({
     queryKey: ['companyTypes'],
     queryFn: async () => {
-      const res = await companyApi.getCompanyTypes();
+      const res = await companyService.getCompanyTypes();
       if (res.error) throw res.error;
       return res.data || [];
     },
@@ -53,7 +53,7 @@ export function useSaveCompany() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: Partial<Company>) => {
-      const res = await companyApi.saveCompany(payload);
+      const res = await companyService.saveCompany(payload);
       if (res.error) throw { ...res };
       return res;
     },
@@ -67,7 +67,7 @@ export function useUpdateCompany() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async (payload: Partial<Company>) => {
-      const res = await companyApi.updateCompany(payload);
+      const res = await companyService.updateCompany(payload);
       if (res.error) throw { ...res };
       return res;
     },

@@ -14,7 +14,7 @@ import MsaAndSowPage from '../client-and-partners/MsaAndSow';
 import DocumentsPage from '../client-and-partners/DocumentsPage';
 import CompanyAddressListPage from './CompanyAddressListPage';
 import CompanyAddDialog from './CompanyAddDialog';
-import { CompanyDetailsPage } from './CompanyDetailsPage';
+import { CompanyDetailsFormView } from './CompanyFormDetailsView';
 
 export default function CompanyList({ bizId }: { bizId: number }) {
   const { data: companies, isLoading } = useCompaniesByBizId(bizId);
@@ -72,6 +72,14 @@ export default function CompanyList({ bizId }: { bizId: number }) {
         onClose={handleViewDialogClose}
         fullWidth
         maxWidth="lg"
+        slotProps={{
+          paper: {
+            sx: {
+              minWidth: 1000,
+              minHeight: 600,
+            },
+          },
+        }}
       >
         {selectedCompany && (
           <>
@@ -82,7 +90,7 @@ export default function CompanyList({ bizId }: { bizId: number }) {
               textColor="primary"
               variant="fullWidth"
             >
-              <Tab label="Company Details" />
+              <Tab label="Company Form Details" />
               <Tab label="Company Addresses" />
               <Tab label="MSA & SOW" />
               <Tab label="Documents" />
@@ -90,7 +98,7 @@ export default function CompanyList({ bizId }: { bizId: number }) {
 
             <DialogContent dividers>
               {activeTab === 0 && (
-                <CompanyDetailsPage company={selectedCompany} />
+                <CompanyDetailsFormView company={selectedCompany} />
               )}
               {activeTab === 1 && (
                 <CompanyAddressListPage company={selectedCompany} />
