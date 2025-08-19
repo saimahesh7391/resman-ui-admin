@@ -14,10 +14,13 @@ import {
   Toolbar,
   Box,
   Button,
+  TableContainer,
+  TableSortLabel,
 } from '@mui/material';
 import { FilterList, ViewColumn } from '@mui/icons-material';
 import { useState } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import { visuallyHidden } from '@mui/utils';
 
 export type Column<T> = {
   key: keyof T;
@@ -36,6 +39,8 @@ export type IntelligentTableProps<T> = {
   onAddClick?: () => void;
   onRowClick?: (row: T) => void;
 };
+
+type Order = 'asc' | 'desc';
 
 export default function IntelligentTable<T>({
   columns,
@@ -58,6 +63,10 @@ export default function IntelligentTable<T>({
     ),
   );
 
+  // Sorting state
+  const [order, setOrder] = useState<Order>('asc');
+  const [orderBy, setOrderBy] = useState<keyof T | null>(null);
+
   const handleSearchChange = (e: any) => {
     const value = e.target.value;
     setSearchValue(value);
@@ -79,13 +88,33 @@ export default function IntelligentTable<T>({
     setAnchorEl(null);
   };
 
+  // Sorting logic
+  const handleSort = (property: keyof T) => {
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
+    setOrderBy(property);
+  };
+
+  const sortedRows = orderBy
+    ? [...rows].sort((a, b) => {
+        const aValue = a[orderBy];
+        const bValue = b[orderBy];
+
+        if (aValue == null) return 1;
+        if (bValue == null) return -1;
+
+        if (aValue < bValue) return order === 'asc' ? -1 : 1;
+        if (aValue > bValue) return order === 'asc' ? 1 : -1;
+        return 0;
+      })
+    : rows;
+
   return (
     <Paper className="mt-4 p-4">
       <Toolbar className="flex flex-wrap justify-between gap-4">
         {enableSearch && (
           <TextField
             value={searchValue}
-            // onChange={handleSearchChange}
             onChange={handleSearchChange}
             placeholder="Search..."
             size="small"
@@ -138,39 +167,51 @@ export default function IntelligentTable<T>({
 
       <Table>
         <TableHead>
-          <TableRow
-            style={{
-              background: '#18206F',
-            }}
-          >
+          <TableRow style={{ background: '#18206F' }}>
             {columns.map(
               (col) =>
                 visibleColumns[col.key] && (
-                  <TableCell
-                    key={String(col.key)}
-                    style={{
-                      color: 'white',
-                    }}
-                  >
-                    {col.label}
+                  <TableCell key={String(col.key)}>
+                    <TableSortLabel
+                      active={orderBy === col.key}
+                      direction={orderBy === col.key ? order : 'asc'}
+                      onClick={() => handleSort(col.key)}
+                      sx={{
+                        color: 'white !important', // always white
+                        '&.Mui-active': {
+                          color: 'white !important', // keep white when active
+                        },
+                        '& .MuiTableSortLabel-icon': {
+                          color: 'white !important', // keep arrow white
+                        },
+                      }}
+                    >
+                      {col.label}
+                      {orderBy === col.key ? (
+                        <Box component="span" sx={visuallyHidden}>
+                          {order === 'desc'
+                            ? 'sorted descending'
+                            : 'sorted ascending'}
+                        </Box>
+                      ) : null}
+                    </TableSortLabel>
                   </TableCell>
                 ),
             )}
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, idx) => (
+          {sortedRows.map((row, idx) => (
             <TableRow
               key={idx}
               className={idx % 2 === 0 ? 'bg-gray-100' : ''}
               hover
               style={{ cursor: onRowClick ? 'pointer' : 'default' }}
-              onClick={() => onRowClick?.(row)} // ✅ Pass row back
+              onClick={() => onRowClick?.(row)}
             >
               {columns.map(
                 (col) =>
                   visibleColumns[col.key] && (
-                    // <TableCell key={String(col.key)}>{String(row[col.key])}</TableCell>
                     <TableCell key={String(col.key)}>
                       {col.render
                         ? col.render(row[col.key], row)
